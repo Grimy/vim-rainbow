@@ -8,6 +8,7 @@
 set background=dark
 let colors_name="rainbow"
 
+highlight clear Normal
 highlight clear SpecialKey
 highlight clear NonText
 highlight clear Directory
@@ -56,13 +57,21 @@ highlight clear Identifier
 highlight clear Statement
 highlight clear PreProc
 highlight clear Type
-highlight clear Underlined
+
 highlight clear Ignore
 highlight clear Error
 highlight clear Todo
 
+highlight clear SignifySignAdd
+highlight clear SignifySignDelete
+highlight clear SignifySignChange
+
 "}}}
 " Vim UI {{{
+highlight Normal         ctermbg=none ctermfg=none
+highlight CursorLine     ctermbg=0
+highlight CursorLineNr   ctermbg=0 cterm=bold ctermfg=3
+
 highlight Directory      cterm=bold ctermfg=12
 
 highlight Search         cterm=reverse
@@ -71,34 +80,34 @@ highlight ModeMsg        cterm=bold
 highlight Question       cterm=bold ctermfg=10
 
 highlight StatusLine     cterm=reverse
-highlight StatusLineNC   ctermbg=0
+highlight StatusLineNC   cterm=reverse ctermfg=7
 
 highlight Title          cterm=bold ctermfg=9
 highlight Visual         ctermbg=0
 
 highlight Folded         cterm=bold ctermfg=12 ctermbg=0
 
-highlight DiffAdd        cterm=bold
-highlight DiffDelete     cterm=bold ctermfg=1
-highlight DiffText       cterm=reverse,bold ctermfg=4
+highlight DiffAdd        ctermbg=22
+highlight DiffDelete     ctermfg=1
+highlight DiffChange     ctermbg=17
+highlight DiffText       cterm=reverse
 
 highlight SpellBad       cterm=underline ctermfg=1
 
 highlight Pmenu          cterm=reverse
 highlight PmenuSel       cterm=reverse,bold ctermfg=8
 
-highlight TabLine        cterm=reverse
+highlight TabLine        cterm=underline ctermbg=8
 highlight TabLineSel     cterm=bold,underline
 
 highlight LineNr         ctermfg=3
-highlight CursorLineNr   cterm=bold ctermfg=3
 highlight ColorColumn    ctermbg=0
-highlight SpecialKey     ctermfg=4
+highlight NonText        ctermfg=4
 
 highlight MatchParen     cterm=reverse
 highlight Underlined     cterm=underline
 
-highlight link NonText      SpecialKey
+highlight link SpecialKey   NonText
 highlight link ErrorMsg     Error
 highlight link WarningMsg   Error
 highlight link IncSearch    Search
@@ -116,7 +125,7 @@ highlight Comment        ctermfg=4
 highlight Identifier     ctermfg=12
 highlight Function       ctermfg=14
 highlight Constant       ctermfg=15
-highlight Special        ctermfg=6
+highlight Special        ctermfg=5
 highlight Statement      ctermfg=9
 highlight Type           ctermfg=2
 highlight Error          cterm=reverse ctermfg=1
@@ -175,16 +184,8 @@ highlight! link xmlEqual   xmlTag
 " JavaScript {{{
 highlight! link javaScript        Normal
 highlight! link javaScriptBraces  Delimiter
-
 "}}}
-" PHP {{{
-highlight phpSpecialFunction    ctermfg=5
-highlight phpIdentifier         ctermfg=11
-highlight! link phpVarSelector  phpIdentifier
-highlight! link phpHereDoc      String
-highlight! link phpDefine       Statement
 
-"}}}
 " Markdown {{{
 highlight! link markdownHeadingRule        NonText
 highlight! link markdownHeadingDelimiter   markdownHeadingRule
@@ -209,6 +210,7 @@ highlight! link rubyStringDelimiter        rubyString
 
 "}}}
 " Git {{{
+
 highlight gitCommitBranch               ctermfg=3
 highlight gitCommitSelectedType         ctermfg=10
 highlight gitCommitSelectedFile         ctermfg=2
@@ -220,7 +222,7 @@ highlight! link gitCommitDiscardedType  gitCommitUnmergedType
 highlight! link gitCommitDiscardedFile  gitCommitUnmergedFile
 
 "}}}
-" Vim {{{
+" VimScript {{{
 highlight! link vimSetSep    Delimiter
 highlight! link vimContinue  Delimiter
 highlight! link vimHiAttrib  Constant
@@ -243,13 +245,6 @@ highlight! link VimwikiCodeChar    markdownCodeDelimiter
 
 "}}}
 " Help {{{
-highlight! link helpExample         String
-highlight! link helpHeadline        Title
-highlight! link helpSectionDelim    Comment
-highlight! link helpHyperTextEntry  Statement
-highlight! link helpHyperTextJump   Underlined
-highlight! link helpURL             Underlined
-
 "}}}
 " CtrlP {{{
 highlight! link CtrlPMatch    String
@@ -274,9 +269,5 @@ highlight SyntasticWarningSign  ctermfg=3   ctermbg=NONE
 highlight SyntasticErrorSign    ctermfg=1   ctermbg=NONE
 
 "}}}
-" Netrw {{{
-highlight netrwExe       ctermfg=9
-highlight netrwClassify  ctermfg=8  cterm=bold
 
-"}}}
 
