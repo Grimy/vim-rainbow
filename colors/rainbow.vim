@@ -1,75 +1,25 @@
-" noctu.vim - Vim color scheme for 16-color cterminals
-" --------------------------------------------------------------
-" Author:   Noah Frederick (http://noahfrederick.com/)
-" Version:  1.7.0
-" --------------------------------------------------------------
+" Copyright © 2014 Grimy <Victor.Adam@derpymail.org>
+" This work is free software. You can redistribute it and/or modify it under
+" the terms of the Do What The Fuck You Want To Public License, Version 2, as
+" published by Sam Hocevar. See the LICENCE file for more details.
 
 " Scheme setup {{{
 set background=dark
 let colors_name="rainbow"
+highlight clear
 
-highlight clear Normal
-highlight clear SpecialKey
-highlight clear NonText
-highlight clear Directory
-highlight clear ErrorMsg
-highlight clear IncSearch
-highlight clear Search
-highlight clear MoreMsg
-highlight clear ModeMsg
-highlight clear Question
-highlight clear StatusLine
-highlight clear StatusLineNC
-highlight clear VertSplit
-highlight clear Title
-highlight clear Visual
-highlight clear WarningMsg
-highlight clear WildMenu
-highlight clear Folded
-highlight clear FoldColumn
-highlight clear DiffAdd
-highlight clear DiffChange
-highlight clear DiffDelete
-highlight clear DiffText
-highlight clear SignColumn
-highlight clear Conceal
-highlight clear SpellBad
-highlight clear SpellCap
-highlight clear SpellRare
-highlight clear SpellLocal
-highlight clear Pmenu
-highlight clear PmenuSel
-highlight clear PmenuSbar
-highlight clear PmenuThumb
-highlight clear TabLine
-highlight clear TabLineSel
-highlight clear TabLineFill
-highlight clear LineNr
-highlight clear CursorColumn
-highlight clear CursorLine
-highlight clear CursorLineNr
-highlight clear ColorColumn
-highlight clear MatchParen
-highlight clear Comment
-highlight clear Constant
-highlight clear Special
-highlight clear Identifier
-highlight clear Statement
-highlight clear PreProc
-highlight clear Type
+let g:rainbow_palette = [
+			\ '#002b36', '#073642', '#586e75', '#657b83', '#839496', '#93a1a1', '#eee8d5', '#fdf6e3',
+			\ '#b58900', '#cb4b16', '#dc322f', '#d33682', '#6c71c4', '#268bd2', '#2aa198', '#859900']
 
-highlight clear Ignore
-highlight clear Error
-highlight clear Todo
-
-highlight clear SignifySignAdd
-highlight clear SignifySignDelete
-highlight clear SignifySignChange
+"*let s:bg = map('ctermbg=' . v:val . ' guibg=' . palette[v:val])*/
+"*let s:fg = map('ctermfg=' . v:val . ' guifg=' . palette[v:val])*/
+let s:bold = 'cterm=bold gui=bold'
 
 "}}}
 " Vim UI {{{
 highlight Normal         ctermbg=none ctermfg=none
-highlight CursorLine     ctermbg=0
+highlight CursorLine     gui=NONE
 highlight CursorLineNr   ctermbg=0 cterm=bold ctermfg=3
 
 highlight Directory      cterm=bold ctermfg=12
