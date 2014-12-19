@@ -1,223 +1,155 @@
-" Copyright © 2014 Grimy <Victor.Adam@derpymail.org>
-" This work is free software. You can redistribute it and/or modify it under
-" the terms of the Do What The Fuck You Want To Public License, Version 2, as
-" published by Sam Hocevar. See the LICENCE file for more details.
-
-" Scheme setup {{{
-set background=dark
-let colors_name="rainbow"
+" Colorscheme initialization {{{1
 highlight clear
+syntax reset
+let colors_name = 'rainbow'
 
-let g:rainbow_palette = [
-			\ '#002b36', '#073642', '#586e75', '#657b83', '#839496', '#93a1a1', '#eee8d5', '#fdf6e3',
-			\ '#b58900', '#cb4b16', '#dc322f', '#d33682', '#6c71c4', '#268bd2', '#2aa198', '#859900']
+let s:bg_base    = ' guibg=#002b36 ctermbg=8'
+let s:bg_bright  = ' guibg=#073642 ctermbg=0'
 
-"*let s:bg = map('ctermbg=' . v:val . ' guibg=' . palette[v:val])*/
-"*let s:fg = map('ctermfg=' . v:val . ' guifg=' . palette[v:val])*/
-let s:bold = 'cterm=bold gui=bold'
+let s:fg_soft    = ' guifg=#586e75 ctermfg=10'
+let s:fg_base    = ' guifg=#839496 ctermfg=12'
+let s:fg_bright  = ' guifg=#eee8d5 ctermfg=7'
 
-"}}}
-" Vim UI {{{
-highlight Normal         ctermbg=none ctermfg=none
-highlight CursorLine     gui=NONE
-highlight CursorLineNr   ctermbg=0 cterm=bold ctermfg=3
+let s:sp_red     = ' guisp=#dc322f'
+let s:fg_red     = ' guifg=#dc322f ctermfg=1'
+let s:fg_orange  = ' guifg=#cb4b16 ctermfg=9'
+let s:fg_yellow  = ' guifg=#b58900 ctermfg=3'
+let s:fg_green   = ' guifg=#719e07 ctermfg=2'
+let s:fg_blue    = ' guifg=#268bd2 ctermfg=4'
+let s:fg_purple  = ' guifg=#6c71c4 ctermfg=13'
 
-highlight Directory      cterm=bold ctermfg=12
+let s:fg_none    = ' guifg=NONE ctermfg=NONE'
+let s:fmt_none   = ' gui=NONE'
+let s:fmt_bold   = ' gui=NONE,bold'
+let s:fmt_line   = ' gui=NONE,underline'
+let s:fmt_curl   = ' gui=NONE,undercurl'
+let s:fmt_ital   = ' gui=NONE,italic'
+let s:fmt_rev    = ' gui=NONE,reverse'
+let s:fmt_revb   = ' gui=NONE,reverse,bold'
 
-highlight Search         cterm=reverse
+" let s:dark0       = '#657b83'
+" let s:light1      = '#93a1a1'
+" let s:light3      = '#fdf6e3'
+" let s:magenta     = '#d33682'
+" let s:cyan        = '#2aa198'
 
-highlight ModeMsg        cterm=bold
-highlight Question       cterm=bold ctermfg=10
+" Syntax highlighting{{{1
 
-highlight StatusLine     cterm=reverse
-highlight StatusLineNC   cterm=reverse ctermfg=7
+exe "highlight! Normal"         .s:fmt_none   .s:fg_base  .s:bg_base
 
-highlight Title          cterm=bold ctermfg=9
-highlight Visual         ctermbg=0
+exe "highlight! Comment"        .s:fmt_ital   .s:fg_soft .s:bg_base
 
-highlight Folded         cterm=bold ctermfg=12 ctermbg=0
+exe "highlight! String"         .s:fmt_none   .s:fg_orange .s:bg_base
+highlight! link Constant Normal
+highlight! link Character Normal
+highlight! link Number Normal
+highlight! link Boolean Normal
+highlight! link Float Normal
 
-highlight DiffAdd        ctermbg=22
-highlight DiffDelete     ctermfg=1
-highlight DiffChange     ctermbg=17
-highlight DiffText       cterm=reverse
+highlight! link Identifier Normal
+highlight! link Function Normal
 
-highlight SpellBad       cterm=underline ctermfg=1
+highlight! link Statement Normal
+highlight! link Conditional Keyword
+highlight! link Repeat Keyword
+highlight! link Label Keyword
+highlight! link Operator Normal
+exe "highlight! Keyword"        .s:fmt_none   .s:fg_yellow  .s:bg_base
+highlight! link Exception Keyword
 
-highlight Pmenu          cterm=reverse
-highlight PmenuSel       cterm=reverse,bold ctermfg=8
+exe "highlight! PreProc"        .s:fmt_none   .s:fg_purple .s:bg_base
+highlight! link Include PreProc
+highlight! link Define PreProc
+highlight! link Macro PreProc
+highlight! link PreCondit PreProc
 
-highlight TabLine        cterm=underline ctermbg=8
-highlight TabLineSel     cterm=bold,underline
+highlight! link Type Keyword
+highlight! link StorageClass Keyword
+highlight! link Structure Keyword
+highlight! link Typedef Keyword
 
-highlight LineNr         ctermfg=3
-highlight ColorColumn    ctermbg=0
-highlight NonText        ctermfg=4
+highlight! link Special Comment
+highlight! link SpecialChar Comment
+highlight! link Tag Underlined
+highlight! link Delimiter Normal
+highlight! link SpecialComment Comment
+highlight! link Debug PreProc
 
-highlight MatchParen     cterm=reverse
-highlight Underlined     cterm=underline
+exe "highlight! Underlined"     .s:fmt_line
+exe "highlight! Error"          .s:fmt_bold   .s:fg_red     .s:bg_base
+exe "highlight! Todo"           .s:fmt_bold   .s:fg_yellow  .s:bg_base
 
-highlight link SpecialKey   NonText
-highlight link ErrorMsg     Error
-highlight link WarningMsg   Error
-highlight link IncSearch    Search
-highlight link MoreMsg      Question
-highlight link VertSplit    StatusLine
-highlight link TabLineFill  StatusLine
-highlight link WildMenu     PMenuSel
-highlight link FoldColumn   Folded
-highlight link SpellCap     SpellBad
-highlight link SpellRare    SpellBad
-highlight link SpellLocal   SpellBad
-"}}}
-" Generic syntax {{{
-highlight Comment        ctermfg=4
-highlight Identifier     ctermfg=12
-highlight Function       ctermfg=14
-highlight Constant       ctermfg=15
-highlight Special        ctermfg=5
-highlight Statement      ctermfg=9
-highlight Type           ctermfg=2
-highlight Error          cterm=reverse ctermfg=1
-highlight Todo           cterm=reverse ctermfg=11
+" UI colors {{{1
 
-highlight link Ignore          NonText
-highlight link String          Constant
-highlight link Character       Constant
-highlight link Number          Constant
-highlight link Boolean         Constant
-highlight link Float           Number
-highlight link Conditional     Statement
-highlight link Repeat          Statement
-highlight link Label           Statement
-highlight link Operator        Statement
-highlight link Keyword         Statement
-highlight link Exception       Statement
-highlight link Include         PreProc
-highlight link Define          PreProc
-highlight link Macro           PreProc
-highlight link PreCondit       PreProc
-highlight link StorageClass    Type
-highlight link Structure       Type
-highlight link Typedef         Type
-highlight link Tag             Special
-highlight link SpecialChar     Special
-highlight link Delimiter       Special
-highlight link SpecialComment  Special
-highlight link PreProc         Special
-highlight link Debug           Special
-"}}}
-" HTML {{{
-highlight htmlTagName              ctermfg=2
-highlight htmlTag                  ctermfg=2
-highlight htmlArg                  ctermfg=10
-highlight htmlH1                   cterm=bold
-highlight htmlBold                 cterm=bold
-highlight htmlItalic               cterm=underline
-highlight htmlUnderline            cterm=underline
-highlight htmlBoldItalic           cterm=bold,underline
-highlight htmlBoldUnderline        cterm=bold,underline
-highlight htmlUnderlineItalic      cterm=underline
-highlight htmlBoldUnderlineItalic  cterm=bold,underline
-highlight! link htmlLink           Underlined
-highlight! link htmlEndTag         htmlTag
-"}}}
-" XML {{{
-highlight xmlTagName       ctermfg=4
-highlight xmlTag           ctermfg=12
-highlight! link xmlString  xmlTagName
-highlight! link xmlAttrib  xmlTag
-highlight! link xmlEndTag  xmlTag
-highlight! link xmlEqual   xmlTag
+exe "highlight! ColorColumn"    .s:fmt_none   .s:fg_none   .s:bg_bright
+" exe "highlight! Conceal"        .s:fmt_none   .s:fg_blue   .s:bg_base
+" exe "highlight! Cursor"         .s:fmt_rev   .s:fg_base
+highlight! link CursorColumn ColorColumn
+highlight! link CursorLine ColorColumn
 
-"}}}
-" JavaScript {{{
-highlight! link javaScript        Normal
-highlight! link javaScriptBraces  Delimiter
-"}}}
+exe "highlight! DiffAdd"        .s:fmt_bold   .s:fg_green  .s:bg_base
+exe "highlight! DiffChange"     .s:fmt_bold   .s:fg_none   .s:bg_bright
+exe "highlight! DiffDelete"     .s:fmt_bold   .s:fg_red    .s:bg_base
+exe "highlight! DiffText"       .s:fmt_bold   .s:fg_yellow .s:bg_base
+exe "highlight! Directory"      .s:fmt_none   .s:fg_blue   .s:bg_base
+highlight! link ErrorMsg Error
+exe "highlight! Folded"         .s:fmt_bold   .s:fg_none  .s:bg_bright
+exe "highlight! IncSearch"      .s:fmt_revb   .s:fg_orange .s:bg_base
+exe "highlight! LineNr"         .s:fmt_none   .s:fg_soft . s:bg_bright
+hi! link MatchParen IncSearch
 
-" Markdown {{{
-highlight! link markdownHeadingRule        NonText
-highlight! link markdownHeadingDelimiter   markdownHeadingRule
-highlight! link markdownLinkDelimiter      Delimiter
-highlight! link markdownURLDelimiter       Delimiter
-highlight! link markdownCodeDelimiter      NonText
-highlight! link markdownLinkTextDelimiter  markdownLinkDelimiter
-highlight! link markdownUrl                markdownLinkText
-highlight! link markdownAutomaticLink      markdownLinkText
-highlight! link markdownCodeBlock          String
-highlight markdownCode                     cterm=bold
-highlight markdownBold                     cterm=bold
-highlight markdownItalic                   cterm=underline
+exe "highlight! Pmenu"          .s:fmt_revb   . s:fg_base  . s:bg_base
+exe "highlight! PmenuSel"       .s:fmt_revb   . s:fg_soft . s:bg_base
 
-"}}}
-" Ruby {{{
-highlight! link rubyDefine                 Statement
-highlight! link rubyLocalVariableOrMethod  Identifier
-highlight! link rubyConstant               Constant
-highlight! link rubyInstanceVariable       Number
-highlight! link rubyStringDelimiter        rubyString
+exe "highlight! Question"       .s:fmt_bold   . s:fg_yellow . s:bg_base
+highlight! link MoreMsg Question
+highlight! link NonText Special
 
-"}}}
-" Git {{{
+exe "highlight! Search"         .s:fmt_rev   .s:fg_yellow .s:bg_base
+exe "highlight! SpellBad"       .s:fmt_curl  .s:sp_red
+highlight! link SpellCap SpellBad
+highlight! link SpellLocal SpellBad
+highlight! link SpellRare SpellBad
 
-highlight gitCommitBranch               ctermfg=3
-highlight gitCommitSelectedType         ctermfg=10
-highlight gitCommitSelectedFile         ctermfg=2
-highlight gitCommitUnmergedType         ctermfg=9
-highlight gitCommitUnmergedFile         ctermfg=1
-highlight! link gitCommitFile           Directory
-highlight! link gitCommitUntrackedFile  gitCommitUnmergedFile
-highlight! link gitCommitDiscardedType  gitCommitUnmergedType
-highlight! link gitCommitDiscardedFile  gitCommitUnmergedFile
+exe "highlight! Title"          .s:fmt_bold   .s:fg_orange .s:bg_base
+highlight! link VertSplit Normal
+exe "highlight! Visual"         .s:fmt_rev   . s:fg_soft . s:bg_base
+exe "highlight! WarningMsg"     .s:fmt_bold   .s:fg_red    .s:bg_base
+exe "highlight! StatusLine"     .s:fmt_revb   .s:fg_base  .s:bg_bright
+exe "highlight! WildMenu"       .s:fmt_revb   .s:fg_bright  .s:bg_base
+highlight! link SignColumn LineNr
+highlight! link SpecialKey Comment
+highlight! link lCursor Cursor
+exe "highlight! YcmWarningSign" .s:fmt_none   .s:fg_yellow  .s:bg_base
 
-"}}}
-" VimScript {{{
-highlight! link vimSetSep    Delimiter
-highlight! link vimContinue  Delimiter
-highlight! link vimHiAttrib  Constant
-"}}}
-" LESS {{{
-highlight lessVariable             ctermfg=11
-highlight! link lessVariableValue  Normal
+" Obsolete
+exe "highlight! PmenuSbar"      .s:fmt_revb
+exe "highlight! FoldColumn"     .s:fmt_none   .s:fg_base  .s:bg_bright
+exe "highlight! StatusLineNC"   .s:fmt_none   .s:fg_base .s:bg_bright .s:fmt_revb
+exe "highlight! TabLine"        .s:fmt_line   .s:fg_base  .s:bg_bright
+exe "highlight! TabLineFill"    .s:fmt_line   .s:fg_base  .s:bg_bright
+exe "highlight! TabLineSel"     .s:fmt_revb   .s:fg_soft .s:bg_bright
+exe "highlight! ModeMsg"        .s:fmt_none   .s:fg_blue   .s:bg_base
+exe "highlight! PmenuThumb"     .s:fmt_none   .s:fg_base  .s:bg_bright  .s:fmt_revb
 
-"}}}
-" NERDTree {{{
-highlight! link NERDTreeHelp      Comment
-highlight! link NERDTreeExecFile  String
+" git & gitcommit highlighting {{{1
 
-"}}}
-" Vimwiki {{{
-highlight! link VimwikiHeaderChar  markdownHeadingDelimiter
-highlight! link VimwikiList        markdownListMarker
-highlight! link VimwikiCode        markdownCode
-highlight! link VimwikiCodeChar    markdownCodeDelimiter
-
-"}}}
-" Help {{{
-"}}}
-" CtrlP {{{
-highlight! link CtrlPMatch    String
-highlight! link CtrlPLinePre  Comment
-
-"}}}
-" Mustache {{{
-highlight mustacheSection           ctermfg=14  cterm=bold
-highlight mustacheMarker            ctermfg=6
-highlight mustacheVariable          ctermfg=14
-highlight mustacheVariableUnescape  ctermfg=9
-highlight mustachePartial           ctermfg=13
-
-"}}}
-" Shell {{{
-highlight shDerefSimple     ctermfg=11
-highlight! link shDerefVar  shDerefSimple
-
-"}}}
-" Syntastic {{{
-highlight SyntasticWarningSign  ctermfg=3   ctermbg=NONE
-highlight SyntasticErrorSign    ctermfg=1   ctermbg=NONE
-
-"}}}
-
-
+highlight! link gitcommitComment   Comment
+highlight! link gitcommitUntracked gitcommitComment
+highlight! link gitcommitDiscarded gitcommitComment
+highlight! link gitcommitSelected  gitcommitComment
+exe "highlight! gitcommitUnmerged"      .s:fmt_bold     .s:fg_green   .s:bg_base
+exe "highlight! gitcommitOnBranch"      .s:fmt_bold     .s:fg_soft    .s:bg_base
+exe "highlight! gitcommitBranch"        .s:fmt_bold     .s:fg_blue    .s:bg_base
+highlight! link gitcommitNoBranch gitcommitBranch
+exe "highlight! gitcommitDiscardedType" .s:fmt_none     .s:fg_red     .s:bg_base
+exe "highlight! gitcommitSelectedType"  .s:fmt_none     .s:fg_green   .s:bg_base
+exe "highlight! gitcommitHeader"        .s:fmt_none     .s:fg_soft    .s:bg_base
+exe "highlight! gitcommitUntrackedFile" .s:fmt_bold     .s:fg_red     .s:bg_base
+exe "highlight! gitcommitDiscardedFile" .s:fmt_bold     .s:fg_red     .s:bg_base
+exe "highlight! gitcommitSelectedFile"  .s:fmt_bold     .s:fg_green   .s:bg_base
+exe "highlight! gitcommitUnmergedFile"  .s:fmt_bold     .s:fg_yellow  .s:bg_base
+exe "highlight! gitcommitFile"          .s:fmt_bold     .s:fg_base    .s:bg_base
+highlight! link gitcommitDiscardedArrow gitcommitDiscardedFile
+highlight! link gitcommitSelectedArrow  gitcommitSelectedFile
+highlight! link gitcommitUnmergedArrow  gitcommitUnmergedFile
