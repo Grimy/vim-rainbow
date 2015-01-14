@@ -12,9 +12,11 @@ function! rainbow#load()
 	for paren in s:parentheses
 		for lvl in range(s:maxlvl)
 			exec lvl == 0 ? printf(def_rg, 'rainbow_r0', 'rainbow_p0', 'rainbow_r'.(s:maxlvl - 1), 'TOP', paren)
-						\ : printf(def_rg, 'rainbow_r'.lvl, 'rainbow_p'.lvl.(' contained'), 'rainbow_r'.((lvl + s:maxlvl - 1) % s:maxlvl), 'TOP', paren)
+						\ : printf(def_rg, 'rainbow_r'.lvl, 'rainbow_p'.lvl.(' contained'),
+						\ 'rainbow_r'.((lvl + s:maxlvl - 1) % s:maxlvl), 'TOP', paren)
 		endfor
 	endfor
+	syn match Error /[])}]/
 	call rainbow#show()
 endfunction
 
@@ -38,7 +40,11 @@ function! rainbow#show()
 endfunction
 
 function! rainbow#toggle()
-	echo exists('b:rainbow_visible') ? rainbow#clear() : rainbow#load()
+	if exists('b:rainbow_visible')
+		call rainbow#clear()
+	else
+		call rainbow#load()
+	endif
 endfunction
 
 augroup Rainbow
