@@ -17,34 +17,20 @@ function! rainbow#load()
 		endfor
 	endfor
 	syn match Error /[])}]/
-	call rainbow#show()
-endfunction
-
-function! rainbow#clear()
-	for i in range(s:maxlvl)
-		exe 'hi clear rainbow_p' . i
-		exe 'hi clear rainbow_o' . i
-		exe 'syn clear rainbow_r' . i
-		exe 'syn clear rainbow_o' . i
-	endfor
-	unlet b:rainbow_visible
-endfunction
-
-function! rainbow#show()
-	let b:rainbow_visible = 1
-	for id in range(s:maxlvl)
-		let color = s:colors[id % len(s:colors)]
-		exe 'hi default rainbow_p' . id color
-		exe 'hi default rainbow_o' . id color
-	endfor
 endfunction
 
 function! rainbow#toggle()
-	if exists('b:rainbow_visible')
-		call rainbow#clear()
-	else
-		call rainbow#load()
-	endif
+	let b:rainbow_visible = !get(b:, 'rainbow_visible', 0)
+	for id in range(s:maxlvl)
+		if b:rainbow_visible
+			let color = s:colors[id % len(s:colors)]
+			exe 'hi default rainbow_p' . id color
+			exe 'hi default rainbow_o' . id color
+		else
+			exe 'hi clear rainbow_p' . id
+			exe 'hi clear rainbow_o' . id
+		endif
+	endfor
 endfunction
 
 augroup Rainbow
